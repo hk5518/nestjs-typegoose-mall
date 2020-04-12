@@ -1,0 +1,22 @@
+{
+    "workbench.settings.editor": "json",
+    // 文件头部注释
+    "fileheader.customMade": {
+        "Descripttion":"",
+        "version":"1.0",
+        "Author":"hk5518",
+        "Date":"Do not edit",
+        // "LastEditors":"hk5518",
+        // "LastEditTime":"Do not Edit"
+    },
+    //函数注释
+    "fileheader.cursorMode": {
+        "name":"",
+        "param":"",
+        "return":""
+    },
+    // 自动去除未引用的库
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    }
+}

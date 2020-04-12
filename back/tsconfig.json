@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "paths": {
+      "@libs/sv": [
+        "libs/sv/src"
+      ],
+      "@libs/sv/*": [
+        "libs/sv/src/*"
+      ],
+      "@libs/common": [
+        "libs/common/src"
+      ],
+      "@libs/common/*": [
+        "libs/common/src/*"
+      ],
+      "@libs/db": [
+        "libs/db/src"
+      ],
+      "@libs/db/*": [
+        "libs/db/src/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
