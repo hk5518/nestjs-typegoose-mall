@@ -2,6 +2,8 @@
 /back/.env
 /back/.gitignore
 /back/node_modules
+/front
+/design
 
 # Logs
 logs
