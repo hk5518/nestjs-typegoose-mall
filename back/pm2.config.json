@@ -1,9 +1,9 @@
 {
     "apps": {
-        "name": "nestjs-typegoose-shop",
+        "name": "nestjs-typegoose-mall",
         "script": "./dist/apps/admin/main.js",
         "watch": true,
-        "instances": 2,
+        "instances": 1,
         "exec_mode": "cluster",
         "ignore_watch": [
             "node_modules",
