@@ -5,6 +5,7 @@
  * @Date: 2020-03-06 10:02:58
  */
 import { Config } from '@libs/common/config';
+import { ConfigService } from '@nestjs/config';
 import { createWriteStream } from 'fs';
 import * as mkdirp from 'mkdirp';
 import { extname, join } from 'path';
@@ -13,7 +14,7 @@ import dayjs = require('dayjs');
 import Jimp = require('jimp');
 
 export class ImageHelper {
-
+    static configService: any = new ConfigService;
     /**
      * 生成验证码
      * @param size 字符数量
@@ -58,7 +59,7 @@ export class ImageHelper {
                 const timestamp = new Date().getTime();
 
                 // 根据日期创建目录
-                const dir = join(__dirname, '../../../', `${process.env.STATIC_PREFIX_PATH}/static/${process.env.UPLOAD_DIR}`, day);
+                const dir = join(__dirname, '../../../', `${this.configService.get('STATIC_PREFIX_PATH')}/static/${this.configService.get('UPLOAD_DIR')}`, day);
                 mkdirp.sync(dir);
                 const uploadDir = join(dir, timestamp + extname(file.originalname));
 

@@ -5,6 +5,7 @@
  * @Date: 2020-02-21 14:31:02
  */
 import { Global, Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { TypegooseModule } from 'nestjs-typegoose';
 
 @Global()
@@ -13,7 +14,7 @@ import { TypegooseModule } from 'nestjs-typegoose';
     TypegooseModule.forRootAsync({
       useFactory() {
         return {
-          uri: process.env.MONGO_URL,
+          uri: (new ConfigService).get('MONGO_URL'),
           useNewUrlParser: true,
           useUnifiedTopology: true,
           useCreateIndex: true,

@@ -7,6 +7,7 @@
 import { ErrorValidationPipe, HttpExceptionFilter, ReturnTransformInterceptor } from '@libs/common';
 import { AuthJwtGuard } from '@libs/common/guards/auth.jwt.guard';
 import { Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -16,18 +17,17 @@ import * as cookieParser from 'cookie-parser';
 import * as rateLimit from 'express-rate-limit';
 import * as session from 'express-session';
 import * as helmet from 'helmet';
-import { AppModule } from './app.module';
 import { join } from 'path';
-
-
-const PREFIX = process.env.PREFIX || '/api';
-const POST = process.env.ADMIN_PORT;
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
+  // 获取配置服务
+  const configService = app.get(ConfigService);
+
   // 给请求添加前缀
-  app.setGlobalPrefix(PREFIX);
+  app.setGlobalPrefix(configService.get('PREFIX'));
 
   // 开启全局http请求参数的管道验证
   app.useGlobalPipes(new ErrorValidationPipe());
@@ -42,7 +42,7 @@ async function bootstrap() {
   app.useGlobalGuards(new AuthJwtGuard());
 
   // 设置静态文件目录
-  app.useStaticAssets(join(__dirname, '../../../', process.env.STATIC_PREFIX_PATH))
+  app.useStaticAssets(join(__dirname, '../../../', configService.get('STATIC_PREFIX_PATH')))
 
   // 配置cookie中间件
   app.use(cookieParser('hk5518 cookies'));
@@ -57,10 +57,10 @@ async function bootstrap() {
   }));
 
   // bodyParser配置
-  app.use(bodyParser.json({ limit: process.env.HTTP_BODY_LIMIT }));
+  app.use(bodyParser.json({ limit: configService.get('HTTP_BODY_LIMIT')}));
   app.use(
     bodyParser.urlencoded({
-      limit: process.env.HTTP_BODY_LIMIT,
+      limit: configService.get('HTTP_BODY_LIMIT'),
       extended: true,
       parameterLimit: 50000,
     }),
@@ -91,10 +91,10 @@ async function bootstrap() {
     .addBearerAuth({type: 'apiKey', name: 'token', in: 'header'})
     .build();
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup(`${PREFIX}/docs`, app, document);
+  SwaggerModule.setup(`${configService.get('PREFIX')}/docs`, app, document);
 
   // 开启应用监听
-  await app.listen(POST);
+  await app.listen(configService.get('ADMIN_PORT'));
   Logger.log(`服务已启动，请访问：${await app.getUrl()}`);
 }
 

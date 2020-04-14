@@ -1,5 +1,5 @@
 # compiled output
-/back/.env
+/back/env
 /back/.gitignore
 /back/node_modules
 /front

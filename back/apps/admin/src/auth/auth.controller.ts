@@ -8,13 +8,14 @@ import { ApiException } from '@libs/common/exception/api.exception';
 import { ImageHelper } from '@libs/common/helper';
 import { UserService } from '@libs/sv/sys/user/user.service';
 import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthLoginDto } from './dto/auth.dto';
 
 
 
-@Controller(`${process.env.ADMIN_PATH}/auth`)
+@Controller(`${(new ConfigService).get('ADMIN_PATH')}/auth`)
 @ApiTags('授权')
 export class AuthController {
 

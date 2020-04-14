@@ -4,16 +4,18 @@
  * @Author: hk5518
  * @Date: 2020-03-22 14:40:56
  */
+import { ConfigService } from '@nestjs/config';
 import { compare, hashSync } from 'bcryptjs';
 
 export class PasswordHelper {
+    static configService: any = new ConfigService;
 
     /**
      * 加密字符串
      * @param password  加密的字符串
      */
     static hashPassword(password: string): string {
-        return hashSync(password, parseInt(process.env.PASSWORD_SALT));
+        return hashSync(password, parseInt(this.configService.get('PASSWORD_SALT')));
     }
 
     /**

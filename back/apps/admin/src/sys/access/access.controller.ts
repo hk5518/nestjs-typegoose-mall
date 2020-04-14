@@ -4,15 +4,16 @@
 * @Author: hk5518
 * @Date: 2020-03-06 11:35:44
 */
-import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
-import { Controller, Get, Post, Body, Query } from '@nestjs/common';
-
 import { AccessService } from '@libs/sv/sys/access/access.service';
-import { AddAccessDto, UpAccessDto, DelAccessDto, FindAccessDto } from './dto/access.dto';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { AddAccessDto, DelAccessDto, FindAccessDto, UpAccessDto } from './dto/access.dto';
+
 
 @ApiTags('资源')
 @ApiBearerAuth()
-@Controller(`${process.env.ADMIN_PATH}/access`)
+@Controller(`${(new ConfigService).get('ADMIN_PATH')}/access`)
 export class AccessController {
     constructor(private readonly accessService: AccessService) {}
 

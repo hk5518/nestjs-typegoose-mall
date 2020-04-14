@@ -7,12 +7,13 @@
 
 import { GoodsCateService } from '@libs/sv/goods/goods_cate/goods_cate.service';
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AddGoodsCateDto, DelGoodsCateDto, UpGoodsCateDto, UpGoodsCateStatusDto } from './dto/goods_cate.dto';
 
 @ApiTags('商品分类')
 @ApiBearerAuth()
-@Controller(`${process.env.ADMIN_PATH}/goodsCate`)
+@Controller(`${(new ConfigService).get('ADMIN_PATH')}/goodsCate`)
 export class GoodsCateController {
     constructor(private readonly goodsCateService: GoodsCateService) {}
 

@@ -4,11 +4,12 @@
 * @Author: hk5518
 * @Date: 2020-02-21 16:17:28
 */
+import { Config } from '@libs/common/config';
 import { JwtStrategy } from '@libs/common/strategy/jwt.strategy';
 import { LocalStrategy } from '@libs/common/strategy/local.strategy';
 import { DbModule } from '@libs/db';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { ChatService } from './chat/chat.service';
@@ -40,7 +41,10 @@ import { UploadService } from './upload/upload.service';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true
+      isGlobal: true,
+      ignoreEnvFile: false,
+      expandVariables: true,
+      envFilePath: Config.envFilePath
     }),
     DbModule,
     TypegooseModule.forFeature([
@@ -60,7 +64,7 @@ import { UploadService } from './upload/upload.service';
     JwtModule.registerAsync({
       useFactory() {
         return {
-          secret: process.env.JWT_SECRET,
+          secret: (new ConfigService).get('JWT_SECRET'),
           SignOptions: {
             expiresIn: 60000
           }

@@ -9,13 +9,14 @@ import { AccessService } from '@libs/sv/sys/access/access.service';
 import { RoleService } from '@libs/sv/sys/role/role.service';
 import { RoleAccessService } from '@libs/sv/sys/role_access/role_access.service';
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AddRoleAccessDto, AddRoleDto, DelManyAccessDto, DelRoleDto, FindAccessByRoleIdDto, FindRolesDto, UpRoleDto } from './dto/role.dto';
 
 
 @ApiTags('角色')
 @ApiBearerAuth()
-@Controller(`${process.env.ADMIN_PATH}/role`)
+@Controller(`${(new ConfigService).get('ADMIN_PATH')}/role`)
 export class RoleController {
 
     constructor(

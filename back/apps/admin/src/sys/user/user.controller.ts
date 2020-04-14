@@ -5,15 +5,16 @@
 * @Date: 2020-02-22 21:03:50
 */
 
-import { Controller, Get, Req, Body, Post, Query } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
-
 import { UserService } from '@libs/sv/sys/user/user.service';
-import { QueryUsersDto, AddUserDto, UpUserDto, upUserPasswordDto, upUserStatusDto, DelUserDto } from './dto/user.dto';
+import { Body, Controller, Get, Post, Query, Req } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { AddUserDto, DelUserDto, QueryUsersDto, UpUserDto, upUserPasswordDto, upUserStatusDto } from './dto/user.dto';
+
 
 @ApiTags('用户')
 @ApiBearerAuth()
-@Controller(`${process.env.ADMIN_PATH}/user`)
+@Controller(`${(new ConfigService).get('ADMIN_PATH')}/user`)
 export class UserController {
     constructor(private readonly userService: UserService) {}
 

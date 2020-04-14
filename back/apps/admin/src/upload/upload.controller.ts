@@ -6,6 +6,7 @@
 */
 import { UploadService } from '@libs/sv/upload/upload.service';
 import { Controller, Post, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { FileFieldsInterceptor, FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { extname, join } from 'path';
@@ -13,7 +14,7 @@ import multer = require('multer');
 import dayjs = require('dayjs');
 import mkdirp = require('mkdirp');
 
-@Controller(`${process.env.ADMIN_PATH}/upload`)
+@Controller(`${(new ConfigService).get('ADMIN_PATH')}/upload`)
 @ApiTags('文件上传')
 export class UploadController {
     constructor(

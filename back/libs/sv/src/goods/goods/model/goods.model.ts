@@ -5,6 +5,7 @@
 * @Date: 2020-03-13 10:21:17
 */
 import { EnumGoodsStatus, EnumYN } from '@libs/common/enum/std.enum';
+import { ConfigService } from '@nestjs/config';
 import { arrayProp, modelOptions, prop, Ref, Typegoose } from '@typegoose/typegoose';
 import { Types } from 'mongoose';
 import { GoodsDescModel } from '../../goods_desc/model/goods_desc.model';
@@ -98,9 +99,10 @@ export class GoodsModel extends Typegoose {
     // 返回带域名的图片地址
     get fullpics(): any[] {
         if (this.pic) {
+            const pre_path = `${(new ConfigService).get('IMAGE_HOST')}/static/${(new ConfigService).get('UPLOAD_DIR')}`;
             return this.pic.split(',').map(file => {
                 return {
-                    url: `${process.env.IMAGE_HOST}/static/${process.env.UPLOAD_DIR}/${file}`
+                    url: `${pre_path}/${file}`
                 }
             })
         } else {

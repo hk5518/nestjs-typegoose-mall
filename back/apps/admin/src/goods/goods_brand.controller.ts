@@ -7,11 +7,12 @@
 */
 import { GoodsBrandService } from '@libs/sv/goods/goods_brand/goods_brand.service';
 import { Controller, Get } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('商品品牌')
 @ApiBearerAuth()
-@Controller(`${process.env.ADMIN_PATH}/goodsBrand`)
+@Controller(`${(new ConfigService).get('ADMIN_PATH')}/goodsBrand`)
 export class GoodsBrandController {
     constructor(
         private readonly goodsBrandService: GoodsBrandService

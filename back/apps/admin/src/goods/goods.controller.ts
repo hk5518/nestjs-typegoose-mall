@@ -6,12 +6,13 @@
 */
 import { GoodsService } from '@libs/sv/goods/goods/goods.service';
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AddGoodsDto, LoadGoodsBySnDto, QryGoodsDto, UpGoodsDto, UpGoodsIsBestDto, UpGoodsIsHotDto, UpGoodsIsNewDto, UpGoodsStatusDto } from './dto/goods.dto';
 
 @ApiTags('商品')
 @ApiBearerAuth()
-@Controller(`${process.env.ADMIN_PATH}/goods`)
+@Controller(`${(new ConfigService).get('ADMIN_PATH')}/goods`)
 export class GoodsController {
     constructor(
         private readonly goodsService: GoodsService

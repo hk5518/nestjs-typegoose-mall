@@ -6,13 +6,14 @@
 */
 import { SettingService } from '@libs/sv/sys/setting/setting.service';
 import { Body, Controller, Get, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UpSettingDto } from './dto/setting.dto';
 
 @ApiTags('站点设置')
 @ApiBearerAuth()
-@Controller(`${process.env.ADMIN_PATH}/setting`)
+@Controller(`${(new ConfigService).get('ADMIN_PATH')}/setting`)
 export class SettingController {
     constructor(
         private readonly settingService: SettingService

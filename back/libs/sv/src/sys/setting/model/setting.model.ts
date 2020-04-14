@@ -4,6 +4,7 @@
  * @Author: hk5518
  * @Date: 2020-04-01 15:28:54
  */
+import { ConfigService } from '@nestjs/config';
 import { modelOptions, prop, Typegoose } from '@typegoose/typegoose';
 
 @modelOptions({
@@ -41,8 +42,9 @@ export class SettingModel extends Typegoose {
     // 返回带域名的logo地址
     get fulllogo(): any {
         if (this.logo) {
+            const url = `${(new ConfigService).get('IMAGE_HOST')}/static/${(new ConfigService).get('UPLOAD_DIR')}/${this.logo}`
             return {
-                url: `${process.env.IMAGE_HOST}/static/${process.env.UPLOAD_DIR}/${this.logo}`
+                url
             }
         } else {
             return ''

@@ -7,10 +7,14 @@
 import { ApiException } from '@libs/common/exception/api.exception';
 import { ImageHelper } from '@libs/common/helper';
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { extname } from 'path';
 
 @Injectable()
 export class UploadService {
+    constructor(
+        private readonly configService: ConfigService
+    ) {}
     /**
      * 上传图片
      *
@@ -45,7 +49,7 @@ export class UploadService {
         }
         return {
             path: saveDir,
-            fullpath: `${process.env.IMAGE_HOST}/static/${process.env.UPLOAD_DIR}/${saveDir}`
+            fullpath: `${this.configService.get('IMAGE_HOST')}/static/${this.configService.get('UPLOAD_DIR')}/${saveDir}`
         }
     }
 }
