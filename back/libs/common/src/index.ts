@@ -8,5 +8,6 @@ export * from './common.module';
 export * from './config';
 export * from './filters/http.exception.filter';
 export * from './Interceptor/transform.interceptor';
+export * from './interface';
 export * from './pipe/error.validation';
 

@@ -32,6 +32,7 @@ export class AuthController {
     @ApiOperation({summary: '获取图形码'})
     async getCaptcha(@Req() req: any, @Res() res: any) {
         const svgCaptcha = ImageHelper.genCaptcha();
+        console.log(svgCaptcha.text)
         req.session.code = svgCaptcha.text.toLocaleLowerCase();
         res.type('image/svg+xml');
         res.status(200).send(svgCaptcha.data);

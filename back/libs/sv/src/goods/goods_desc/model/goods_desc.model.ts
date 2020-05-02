@@ -4,7 +4,7 @@
 * @Author: hk5518
 * @Date: 2020-03-13 10:21:17
 */
-import { modelOptions, prop, Typegoose } from '@typegoose/typegoose';
+import { modelOptions, prop } from '@typegoose/typegoose';
 
 @modelOptions({
     schemaOptions: {
@@ -12,7 +12,7 @@ import { modelOptions, prop, Typegoose } from '@typegoose/typegoose';
         toJSON: {virtuals: true}
     }
 })
-export class GoodsDescModel extends Typegoose {
+export class GoodsDescModel {
 
     @prop({unique: true, index: true})
     sn: string // 商品唯一码

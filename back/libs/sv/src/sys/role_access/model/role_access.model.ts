@@ -4,7 +4,7 @@
 * @Author: hk5518
 * @Date: 2020-03-08 08:45:08
 */
-import { modelOptions, prop, Typegoose } from '@typegoose/typegoose';
+import { modelOptions, prop } from '@typegoose/typegoose';
 import { Types } from 'mongoose';
 
 @modelOptions({
@@ -15,7 +15,7 @@ import { Types } from 'mongoose';
     }
 })
 
-export class RoleAccessModel extends Typegoose {
+export class RoleAccessModel {
     @prop({type: Types.ObjectId})
     role_id: any // 角色编号
 

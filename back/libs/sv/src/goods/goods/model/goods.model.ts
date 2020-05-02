@@ -6,7 +6,7 @@
 */
 import { EnumGoodsStatus, EnumYN } from '@libs/common/enum/std.enum';
 import { ConfigService } from '@nestjs/config';
-import { arrayProp, modelOptions, prop, Ref, Typegoose } from '@typegoose/typegoose';
+import { arrayProp, modelOptions, prop, Ref } from '@typegoose/typegoose';
 import { Types } from 'mongoose';
 import { GoodsDescModel } from '../../goods_desc/model/goods_desc.model';
 import { GoodsSkuModel } from './../../goods_sku/model/goods_sku.model';
@@ -17,7 +17,7 @@ import { GoodsSkuModel } from './../../goods_sku/model/goods_sku.model';
         toJSON: {virtuals: true}
     }
 })
-export class GoodsModel extends Typegoose {
+export class GoodsModel {
 
     @prop({type: Types.ObjectId})
     goods_cate_id1: any // 商品一级分类编号

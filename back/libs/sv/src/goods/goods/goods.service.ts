@@ -4,7 +4,6 @@ import { StrHelper } from '@libs/common/helper';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ReturnModelType } from '@typegoose/typegoose/lib/types';
-import { Validator } from 'class-validator';
 import { Types } from 'mongoose';
 import { v1 as uuidv1 } from 'uuid';
 import { GoodsDescModel } from '../goods_desc/model/goods_desc.model';
@@ -13,14 +12,11 @@ import { GoodsModel } from './model/goods.model';
 
 @Injectable()
 export class GoodsService {
-    validator: any
     constructor(
         @InjectModel('GoodsModel') private readonly goodsModel: ReturnModelType<typeof GoodsModel>,
         @InjectModel('GoodsDescModel') private readonly goodsDescModel: ReturnModelType<typeof GoodsDescModel>,
         private readonly goodsSkuService: GoodsSkuService
-    ){
-        this.validator = new Validator();
-    }
+    ){}
 
     /**
      * 查询商品

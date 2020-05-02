@@ -46,3 +46,9 @@ export enum EnumGoodsStatus {
     UP = 1, // 上架
     DEL = 2, // 删除
 }
+
+export enum EnumSex {
+    NEUTRAL=0, // 中性
+    FEMALE = 1, // 女
+    MALE = 2, // 男
+}

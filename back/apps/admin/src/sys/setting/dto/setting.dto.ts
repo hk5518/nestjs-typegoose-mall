@@ -20,7 +20,7 @@ export class UpSettingDto {
 
     @ApiProperty({description: '站点手机号'})
     @IsNotEmpty({message: '站点手机号不能为空！'})
-    phone: string
+    phone: number
 
     @ApiProperty({description: '站点设置编码', required: false})
     id?: string

@@ -4,9 +4,9 @@
 * @Author: hk5518
 * @Date: 2020-03-13 10:22:23
 */
-import { prop, arrayProp, Ref } from '@typegoose/typegoose';
-import { Typegoose, modelOptions } from '@typegoose/typegoose';
 import { EnumYN } from '@libs/common/enum/std.enum';
+import { ObjectId } from '@libs/common/interface';
+import { arrayProp, modelOptions, mongoose, prop, Ref } from '@typegoose/typegoose';
 
 @modelOptions({
     schemaOptions: {
@@ -14,15 +14,15 @@ import { EnumYN } from '@libs/common/enum/std.enum';
         toJSON: {virtuals: true}
     }
 })
-export class GoodsCateModel extends Typegoose {
+export class GoodsCateModel {
     @prop()
     name: string // 分类名称
 
     @prop()
     icon: string // 分类图标
 
-    @prop()
-    pid: any // 分类父编号
+    @prop({required: true, type: mongoose.Schema.Types.ObjectId})
+    pid: ObjectId // 分类父编号
 
     @prop()
     level: number // 分类级别

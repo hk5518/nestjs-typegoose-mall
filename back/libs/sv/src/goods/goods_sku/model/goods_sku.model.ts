@@ -5,7 +5,8 @@
 * @Date: 2020-03-13 10:39:56
 */
 import { EnumYN } from '@libs/common/enum/std.enum';
-import { modelOptions, prop, Typegoose } from '@typegoose/typegoose';
+import { Array } from '@libs/common/interface';
+import { modelOptions, mongoose, prop } from '@typegoose/typegoose';
 
 @modelOptions({
     schemaOptions: {
@@ -13,7 +14,7 @@ import { modelOptions, prop, Typegoose } from '@typegoose/typegoose';
         toJSON: {virtuals: true}
     }
 })
-export class GoodsSkuModel extends Typegoose {
+export class GoodsSkuModel {
 
     @prop({unique: true, index: true})
     sn: string // 商品唯一码
@@ -39,6 +40,6 @@ export class GoodsSkuModel extends Typegoose {
     @prop({enum: EnumYN, default: EnumYN.YES})
     status: number // @状态 0: 未启用；1:启用
 
-    @prop()
-    sku_json: any // sku销售属性
+    @prop({type: mongoose.Schema.Types.Array})
+    sku_json?: Array // sku销售属性
 }

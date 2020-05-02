@@ -7,7 +7,7 @@
 import { EnumYN } from '@libs/common/enum/std.enum';
 import { PasswordHelper } from '@libs/common/helper';
 import { RoleModel } from '@libs/sv/sys/role/model/role.model';
-import { modelOptions, prop, Ref, Typegoose } from '@typegoose/typegoose';
+import { modelOptions, prop, Ref } from '@typegoose/typegoose';
 import { Schema } from 'mongoose';
 
 
@@ -17,7 +17,7 @@ import { Schema } from 'mongoose';
         toJSON: { virtuals: true } // 为true时，可以查询出虚拟字段
     }
 })
-export class UserModel extends Typegoose {
+export class UserModel {
     @prop({unique: true})
     username: string
 

@@ -4,8 +4,10 @@
  * @Author: hk5518
  * @Date: 2020-03-06 10:02:57
  */
-export * from './str';
 export * from './date';
-export * from './password';
+export * from './email';
 export * from './image';
 export * from './json';
+export * from './password';
+export * from './str';
+

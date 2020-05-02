@@ -5,7 +5,6 @@
 * @Date: 2020-02-20 17:29:35
 */
 import { ErrorValidationPipe, HttpExceptionFilter, ReturnTransformInterceptor } from '@libs/common';
-import { AuthJwtGuard } from '@libs/common/guards/auth.jwt.guard';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
@@ -25,6 +24,7 @@ async function bootstrap() {
 
   // 获取配置服务
   const configService = app.get(ConfigService);
+  console.log(configService.get('PREFIX'), '____________')
 
   // 给请求添加前缀
   app.setGlobalPrefix(configService.get('PREFIX'));
@@ -39,13 +39,13 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ReturnTransformInterceptor());
 
   // 开启全局请求的jwt验证
-  app.useGlobalGuards(new AuthJwtGuard());
+  // app.useGlobalGuards(new AuthJwtGuard());
 
   // 设置静态文件目录
   app.useStaticAssets(join(__dirname, '../../../', configService.get('STATIC_PREFIX_PATH')))
 
   // 配置cookie中间件
-  app.use(cookieParser('hk5518 cookies'));
+  app.use(cookieParser());
 
   // 配置session的中间件
   app.use(session({

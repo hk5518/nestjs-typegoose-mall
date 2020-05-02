@@ -4,7 +4,7 @@
  * @Author: hk5518
  * @Date: 2020-04-10 18:09:07
  */
-import { modelOptions, prop, Typegoose } from '@typegoose/typegoose';
+import { modelOptions, prop } from '@typegoose/typegoose';
 import { Types } from 'mongoose';
 
 @modelOptions({
@@ -16,7 +16,7 @@ import { Types } from 'mongoose';
 
     }
 })
-export class ChatModel extends Typegoose {
+export class ChatModel {
     @prop({type: Types.ObjectId})
     user_id: any // 用户编码
 

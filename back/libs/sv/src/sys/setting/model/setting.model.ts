@@ -5,7 +5,7 @@
  * @Date: 2020-04-01 15:28:54
  */
 import { ConfigService } from '@nestjs/config';
-import { modelOptions, prop, Typegoose } from '@typegoose/typegoose';
+import { modelOptions, prop } from '@typegoose/typegoose';
 
 @modelOptions({
     schemaOptions: {
@@ -13,7 +13,7 @@ import { modelOptions, prop, Typegoose } from '@typegoose/typegoose';
         toJSON: {virtuals: true}
     }
 })
-export class SettingModel extends Typegoose {
+export class SettingModel {
 
     @prop()
     title: string // 站点标题

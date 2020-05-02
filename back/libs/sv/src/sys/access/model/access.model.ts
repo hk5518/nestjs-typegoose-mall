@@ -5,9 +5,8 @@
  * @Date: 2020-03-06 11:08:57
  */
 import { EnumAccessType } from '@libs/common/enum/std.enum';
-import { arrayProp, modelOptions, prop, Ref, Typegoose } from '@typegoose/typegoose';
-import { Schema } from 'mongoose';
-
+import { AccessPid } from '@libs/common/interface';
+import { arrayProp, modelOptions, mongoose, prop, Ref } from '@typegoose/typegoose';
 
 @modelOptions({
     schemaOptions: {
@@ -15,7 +14,7 @@ import { Schema } from 'mongoose';
         toJSON: {virtuals: true}
     }
 })
-export class AccessModel extends Typegoose{
+export class AccessModel {
     @prop()
     name: string // 资源名称
 
@@ -25,8 +24,8 @@ export class AccessModel extends Typegoose{
     @prop()
     url: string // 路由地址
 
-    @prop({type: Schema.Types.Mixed})
-    pid: any // 资源编号和当前模型的_id关联，pid = 0 表示模块
+    @prop({required: true, type: mongoose.Schema.Types.Mixed})
+    pid: AccessPid // 资源编号和当前模型的_id关联，pid = 0 表示模块
 
     @prop()
     icon: string // 文字图标

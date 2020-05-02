@@ -26,6 +26,8 @@ import { GoodsCateModel } from './goods/goods_cate/model/goods_cate.model';
 import { GoodsDescModel } from './goods/goods_desc/model/goods_desc.model';
 import { GoodsSkuService } from './goods/goods_sku/goods_sku.service';
 import { GoodsSkuModel } from './goods/goods_sku/model/goods_sku.model';
+import { MemberService } from './member/member/member.service';
+import { MemberModel } from './member/member/model/member.model';
 import { AccessService } from './sys/access/access.service';
 import { AccessModel } from './sys/access/model/access.model';
 import { RoleModel } from './sys/role/model/role.model';
@@ -49,6 +51,7 @@ import { UploadService } from './upload/upload.service';
     DbModule,
     TypegooseModule.forFeature([
       {typegooseClass: ChatModel, schemaOptions: {collection: 'chat'}},
+      {typegooseClass: MemberModel, schemaOptions: {collection: 'member'}},
       {typegooseClass: SettingModel, schemaOptions: {collection: 'setting'}},
       {typegooseClass: UserModel, schemaOptions: {collection: 'user'}},
       {typegooseClass: RoleModel, schemaOptions: {collection: 'role'}},
@@ -72,7 +75,7 @@ import { UploadService } from './upload/upload.service';
       }
     })
   ],
-  providers: [EventsGateway, LocalStrategy, JwtStrategy, UploadService, ChatService, SettingService, UserService, RoleService, AccessService, RoleAccessService, GoodsService, GoodsSkuService, GoodsCateService, GoodsAttrTplService, GoodsBrandService],
-  exports: [EventsGateway, LocalStrategy, JwtStrategy, JwtModule, UploadService, ChatService, SettingService, UserService, RoleService, AccessService, RoleAccessService, GoodsService, GoodsSkuService, GoodsCateService, GoodsAttrTplService, GoodsBrandService],
+  providers: [EventsGateway, LocalStrategy, JwtStrategy, UploadService, ChatService, MemberService, SettingService, UserService, RoleService, AccessService, RoleAccessService, GoodsService, GoodsSkuService, GoodsCateService, GoodsAttrTplService, GoodsBrandService],
+  exports: [EventsGateway, LocalStrategy, JwtStrategy, JwtModule, UploadService, ChatService, MemberService, SettingService, UserService, RoleService, AccessService, RoleAccessService, GoodsService, GoodsSkuService, GoodsCateService, GoodsAttrTplService, GoodsBrandService],
 })
 export class SvModule {}

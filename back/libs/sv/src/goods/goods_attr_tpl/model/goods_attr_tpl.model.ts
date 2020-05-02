@@ -5,7 +5,7 @@
 * @Date: 2020-03-13 10:39:56
 */
 import { EnumAttrType, EnumYN } from '@libs/common/enum/std.enum';
-import { modelOptions, prop, Typegoose } from '@typegoose/typegoose';
+import { modelOptions, prop } from '@typegoose/typegoose';
 import { Types } from 'mongoose';
 
 @modelOptions({
@@ -14,7 +14,7 @@ import { Types } from 'mongoose';
         toJSON: {virtuals: true}
     }
 })
-export class GoodsAttrTplModel extends Typegoose {
+export class GoodsAttrTplModel {
     @prop()
     name: string // 属性名称
 

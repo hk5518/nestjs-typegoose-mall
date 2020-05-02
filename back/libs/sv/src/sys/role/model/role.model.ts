@@ -4,9 +4,9 @@
  * @Author: hk5518
  * @Date: 2020-03-04 16:09:26
  */
-import { Typegoose, prop, modelOptions } from '@typegoose/typegoose';
-
 import { EnumYN } from '@libs/common/enum/std.enum';
+import { modelOptions, prop } from '@typegoose/typegoose';
+
 
 @modelOptions({
     schemaOptions: {
@@ -14,7 +14,7 @@ import { EnumYN } from '@libs/common/enum/std.enum';
         toJSON: { virtuals: true }
     }
 })
-export class RoleModel extends Typegoose {
+export class RoleModel {
     @prop({unique: true})
     title: string
 

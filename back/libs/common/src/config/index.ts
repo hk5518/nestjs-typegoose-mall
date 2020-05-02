@@ -6,7 +6,7 @@
  */
 export const Config = {
     // development: 开发环境；production: 生产环境
-    envFilePath: 'env/production.env',
+    envFilePath: 'env/development.env',
     // 控制器白名单
     whiteCtrlList: [
         `/v1/admin/auth/login`,

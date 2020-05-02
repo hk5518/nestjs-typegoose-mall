@@ -9,12 +9,13 @@
 import { ApiException } from '@libs/common/exception/api.exception';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { ModelType } from '@typegoose/typegoose/lib/types';
-import { Document, Types } from 'mongoose';
+import { ReturnModelType } from '@typegoose/typegoose/lib/types';
+import { Types } from 'mongoose';
+import { RoleAccessModel } from './model/role_access.model';
 
 @Injectable()
 export class RoleAccessService {
-    constructor(@InjectModel('RoleAccessModel') private readonly roleAccessModel: ModelType<Document>) {}
+    constructor(@InjectModel('RoleAccessModel') private readonly roleAccessModel: ReturnModelType<typeof RoleAccessModel>) {}
 
     /**
      * 添加角色资源关系

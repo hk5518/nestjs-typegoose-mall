@@ -10,18 +10,15 @@ import { PasswordHelper, StrHelper } from '@libs/common/helper';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ModelType } from '@typegoose/typegoose/lib/types';
-import { Validator } from 'class-validator';
+import { isEmail, isEmpty, isMobilePhone } from 'class-validator';
 import { Types } from 'mongoose';
 
 
 @Injectable()
 export class UserService {
-    validator: any
     constructor(
         @InjectModel('UserModel') private readonly userModel: ModelType<Document>
-    ) {
-        this.validator = new Validator();
-    }
+    ) {}
 
     async qryUsersAll(keyword: string = '', page: number = 1, size: number = 10) {
         // 去除关键词的左右空格
@@ -30,9 +27,9 @@ export class UserService {
 
         // 判断关键词的类型
         let match = {};
-        if(this.validator.isEmail(newKeyword)) {
+        if(isEmail(newKeyword)) {
             match = { 'email': { $regex: reg } }
-        } else if(this.validator.isMobilePhone(newKeyword)) {
+        } else if(isMobilePhone(newKeyword)) {
             match = { 'mobile': { $regex: reg } }
         } else {
             match = { 'username': { $regex: reg } }
@@ -68,9 +65,9 @@ export class UserService {
 
         // 判断关键词的类型
         let match = {};
-        if(this.validator.isEmail(newKeyword)) {
+        if(isEmail(newKeyword)) {
             match = { 'email': { $regex: reg } }
-        } else if(this.validator.isMobilePhone(newKeyword)) {
+        } else if(isMobilePhone(newKeyword)) {
             match = { 'mobile': { $regex: reg } }
         } else {
             match = { 'username': { $regex: reg } }
@@ -134,7 +131,7 @@ export class UserService {
     async login(username: string, password: string): Promise<any> {
         // 检测用户是否存在
         const user = await this.loadUserByUsername(username);
-        if (this.validator.isEmpty(user)) throw new ApiException('用户不存在！');
+        if (isEmpty(user)) throw new ApiException('用户不存在！');
 
         // 检测密码是否正确
         const flag = await PasswordHelper.comparePassword(password, user.password);

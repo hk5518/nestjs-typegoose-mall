@@ -43,7 +43,7 @@ export class AddUserDto {
 
     @ApiProperty({description: '用户手机号'})
     @IsNotEmpty({message: '手机号不能为空！'})
-    @IsMobilePhone('zh-CN', {message: '手机号格式不正确！'})
+    @IsMobilePhone('zh-CN', {strictMode: true}, {message: '手机号格式不正确！'})
     mobile: string
 
     @ApiProperty({description: '用户邮箱', required: false})
@@ -63,7 +63,7 @@ export class UpUserDto {
 
     @ApiProperty({description: '用户手机号'})
     @IsNotEmpty({message: '手机号不能为空！'})
-    @IsMobilePhone('zh-CN', {message: '手机号格式不正确！'})
+    @IsMobilePhone('zh-CN', {strictMode: true}, {message: '手机号格式不正确！'})
     mobile: string
 
     @ApiProperty({description: '用户邮箱', required: false})

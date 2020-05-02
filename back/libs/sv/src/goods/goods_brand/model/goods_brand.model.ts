@@ -5,7 +5,7 @@
 * @Date: 2020-03-13 10:39:56
 */
 import { EnumYN } from '@libs/common/enum/std.enum';
-import { modelOptions, prop, Typegoose } from '@typegoose/typegoose';
+import { modelOptions, prop } from '@typegoose/typegoose';
 
 @modelOptions({
     schemaOptions: {
@@ -13,7 +13,7 @@ import { modelOptions, prop, Typegoose } from '@typegoose/typegoose';
         toJSON: {virtuals: true}
     }
 })
-export class GoodsBrandModel extends Typegoose {
+export class GoodsBrandModel {
     @prop()
     name: string // 品牌名称
 

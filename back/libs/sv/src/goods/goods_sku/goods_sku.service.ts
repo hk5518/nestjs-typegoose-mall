@@ -46,7 +46,7 @@ export class GoodsSkuService {
      */
     async delGoodsSkuBySn(sn: string) {
         try {
-            return await this.goodsSkuModel.remove({sn})
+            return await this.goodsSkuModel.deleteMany({sn})
         } catch (error) {
             throw new ApiException(`批量删除商品sku失败:${JSON.stringify(error)}`);
         }
